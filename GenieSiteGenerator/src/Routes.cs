@@ -18,7 +18,7 @@ namespace GenieSiteGenerator.src
             {
                 string htmlContent = await Generator.GenerateHtmlWithAI(content, chatClient);
                 string uniqueId = Generator.GenerateUniqueId();
-                var containerClient = blobServiceClient.GetBlobContainerClient("static-pages");
+                var containerClient = blobServiceClient.GetBlobContainerClient("$web");
                 var blobClient = containerClient.GetBlobClient($"{uniqueId}.html");
                 await blobClient.UploadAsync(BinaryData.FromString(htmlContent), new BlobUploadOptions
                 {
@@ -29,7 +29,7 @@ namespace GenieSiteGenerator.src
                     }
                 });
                 string cdnEndpoint = "https://geniecdn.azureedge.net";
-                string cdnUrl = $"{cdnEndpoint}/static-pages/{uniqueId}.html";
+                string cdnUrl = $"{cdnEndpoint}/$web/{uniqueId}.html";
                 return Results.Ok(new { Url = cdnUrl, Id = uniqueId });
             })
             .WithName("GenerateStaticPage")
@@ -43,13 +43,13 @@ namespace GenieSiteGenerator.src
                 {
                     id += ".html";
                 }
-                var containerClient = blobServiceClient.GetBlobContainerClient("static-pages");
+                var containerClient = blobServiceClient.GetBlobContainerClient("$web");
                 var blobClient = containerClient.GetBlobClient(id);
                 if (await blobClient.ExistsAsync())
                 {
                     // TODO: Replace with appsetting values
                     string cdnEndpoint = "https://geniecdn.azureedge.net";
-                    string cdnUrl = $"{cdnEndpoint}/static-pages/{id}";
+                    string cdnUrl = $"{cdnEndpoint}/$web/{id}";
                     return Results.Redirect(cdnUrl);
                 }
                 else
