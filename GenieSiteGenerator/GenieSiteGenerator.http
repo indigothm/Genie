@@ -1,0 +1,6 @@
+@GenieSiteGenerator_HostAddress = http://localhost:5101
+
+GET {{GenieSiteGenerator_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
