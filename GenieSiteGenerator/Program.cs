@@ -39,7 +39,7 @@ app.UseHttpsRedirection();
 app.Lifetime.ApplicationStarted.Register(async () =>
 {
     var blobServiceClient = app.Services.GetRequiredService<BlobServiceClient>();
-    var containerClient = blobServiceClient.GetBlobContainerClient("static-pages");
+    var containerClient = blobServiceClient.GetBlobContainerClient("$web");
     await containerClient.CreateIfNotExistsAsync();
     await containerClient.SetAccessPolicyAsync(PublicAccessType.Blob);
 });
