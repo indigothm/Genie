@@ -1,0 +1,147 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business Name | Business Type</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-sans text-gray-800 leading-normal">
+    <!-- Navigation Section -->
+    <nav class="bg-white shadow-md">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <a href="#" class="text-xl font-semibold">Business Name</a>
+                <div class="md:hidden">
+                    <button id="menu-toggle" class="text-gray-500 hover:text-gray-600 focus:outline-none focus:text-gray-600">
+                        <svg class="h-6 w-6 fill-current" viewBox="0 0 24 24">
+                            <path d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2z" />
+                        </svg>
+                    </button>
+                </div>
+                <div class="hidden md:flex space-x-4">
+                    <a href="#about" class="text-gray-700 hover:text-gray-900">About</a>
+                    <a href="#services" class="text-gray-700 hover:text-gray-900">Services</a>
+                    <a href="#portfolio" class="text-gray-700 hover:text-gray-900">Portfolio</a>
+                    <a href="#contact" class="text-gray-700 hover:text-gray-900">Contact</a>
+                </div>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#about" class="block px-3 py-2 text-gray-700 hover:bg-gray-100">About</a>
+                <a href="#services" class="block px-3 py-2 text-gray-700 hover:bg-gray-100">Services</a>
+                <a href="#portfolio" class="block px-3 py-2 text-gray-700 hover:bg-gray-100">Portfolio</a>
+                <a href="#contact" class="block px-3 py-2 text-gray-700 hover:bg-gray-100">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header Section -->
+    <header class="bg-gray-100 py-20 text-center">
+        <div class="container mx-auto px-4">
+            <h1 class="text-4xl md:text-5xl font-bold mb-2">Business Name</h1>
+            <p class="text-xl text-gray-600">Business Type or Tagline</p>
+        </div>
+    </header>
+
+    <main>
+        <!-- About Section -->
+        <section id="about" class="py-16">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl font-bold text-center mb-8">About Us</h2>
+                <p class="max-w-2xl mx-auto text-center">Brief description of the business, its history, and its mission. Highlight what makes the business unique and why customers should choose it.</p>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services" class="bg-gray-100 py-16">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl font-bold text-center mb-8">Our Services</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <h3 class="text-xl font-semibold mb-2">Service 1</h3>
+                        <p>Description of service 1 and its benefits.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <h3 class="text-xl font-semibold mb-2">Service 2</h3>
+                        <p>Description of service 2 and its benefits.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <h3 class="text-xl font-semibold mb-2">Service 3</h3>
+                        <p>Description of service 3 and its benefits.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Portfolio Section -->
+        <section id="portfolio" class="py-16">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl font-bold text-center mb-8">Our Portfolio</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="bg-white rounded-lg overflow-hidden shadow-md">
+                        <img src="https://placehold.co/400x300.png" alt="Project 1" class="w-full h-48 object-cover">
+                        <div class="p-4">
+                            <h3 class="text-xl font-semibold mb-2">Project 1</h3>
+                            <p>Brief description of project 1 and its outcome.</p>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-lg overflow-hidden shadow-md">
+                        <img src="https://placehold.co/400x300.png" alt="Project 2" class="w-full h-48 object-cover">
+                        <div class="p-4">
+                            <h3 class="text-xl font-semibold mb-2">Project 2</h3>
+                            <p>Brief description of project 2 and its outcome.</p>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-lg overflow-hidden shadow-md">
+                        <img src="https://placehold.co/400x300.png" alt="Project 3" class="w-full h-48 object-cover">
+                        <div class="p-4">
+                            <h3 class="text-xl font-semibold mb-2">Project 3</h3>
+                            <p>Brief description of project 3 and its outcome.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="bg-gray-100 py-16">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl font-bold text-center mb-8">Contact Us</h2>
+                <div class="max-w-lg mx-auto text-center">
+                    <p class="mb-4"><strong>Address:</strong> 123 Business St, City, State, ZIP</p>
+                    <p class="mb-4"><strong>Phone:</strong> (123) 456-7890</p>
+                    <p class="mb-4"><strong>Email:</strong> info@businessname.com</p>
+                    <p>Business Hours: Monday - Friday, 9:00 AM - 5:00 PM</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-4 text-center">
+            <p>&copy; 2024 Business Name. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+    </script>
+</body>
+</html>
