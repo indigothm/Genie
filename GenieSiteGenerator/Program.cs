@@ -13,18 +13,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton(x =>
     new BlobServiceClient(builder.Configuration["AzureBlobStorage:ConnectionString"]));
-builder.Services.AddSingleton<ChatClient>(sp =>
-{
-    var azureOpenAIConfig = builder.Configuration.GetSection("AzureOpenAI");
-    string key = azureOpenAIConfig["Key"]!;
-    string endpoint = azureOpenAIConfig["Endpoint"]!;
-    string deploymentName = azureOpenAIConfig["DeploymentName"]!;
-    AzureOpenAIClient azureClient = new(
-        new Uri(endpoint),
-        new AzureKeyCredential(key));
-    var client = azureClient.GetChatClient(deploymentName);
-    return client;
-});
+
+builder.AddSemanticKernelServices();
 
 var app = builder.Build();
 

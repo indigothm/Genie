@@ -1,4 +1,5 @@
-﻿using OpenAI.Chat;
+﻿using Microsoft.SemanticKernel.ChatCompletion;
+using OpenAI.Chat;
 using System.IO;
 using System.Reflection;
 
@@ -6,7 +7,7 @@ namespace GenieSiteGenerator.src
 {
     public class Generator
     {
-        public static async Task<string> GenerateHtmlWithAI(PageContent content, ChatClient chatClient)
+        public static async Task<string> GenerateHtmlWithAI(PageContent content, IChatCompletionService chatCompletionService)
         {
             string templatePath = Path.Combine(GetResourcePath(), "Templates", "template.html");
 
@@ -40,7 +41,7 @@ namespace GenieSiteGenerator.src
 
                 {templateContent}";
 
-            ChatCompletion completion = await chatClient.CompleteChatAsync([
+            ChatCompletion completion = await chatCompletionService.CompleteChatAsync([
                 new SystemChatMessage(systemPrompt),
                 new UserChatMessage(userPrompt)
             ]);
