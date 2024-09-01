@@ -23,6 +23,7 @@ namespace GenieSiteGenerator.src
 
             var kernel = kernelBuilder.Build();
 
+            // TODO: Figure out why this breaks
             var chatCompletionService = kernel.GetRequiredService<IChatCompletionService>();
 
             OpenAIPromptExecutionSettings openAIPromptExecutionSettings = new()
@@ -35,6 +36,9 @@ namespace GenieSiteGenerator.src
 
             builder.Services.AddSingleton<IChatCompletionService>(chatCompletionService);
 
+            builder.Services.AddSingleton<OpenAIPromptExecutionSettings>(openAIPromptExecutionSettings);
+
+            builder.Services.AddSingleton<Kernel>(kernel);
 
             return builder;
         }

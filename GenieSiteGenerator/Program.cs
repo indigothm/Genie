@@ -1,8 +1,5 @@
 using Azure.Storage.Blobs;
 using Azure.Storage.Blobs.Models;
-using Azure.AI.OpenAI;
-using Azure;
-using OpenAI.Chat;
 using GenieSiteGenerator.src;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,6 +12,7 @@ builder.Services.AddSingleton(x =>
     new BlobServiceClient(builder.Configuration["AzureBlobStorage:ConnectionString"]));
 
 builder.AddSemanticKernelServices();
+builder.AddWebsiteGeneratorService();
 
 var app = builder.Build();
 
