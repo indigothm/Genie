@@ -1,8 +1,5 @@
 using Azure.Storage.Blobs;
 using Azure.Storage.Blobs.Models;
-using Azure.AI.OpenAI;
-using Azure;
-using OpenAI.Chat;
 using GenieSiteGenerator.src;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,18 +10,9 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton(x =>
     new BlobServiceClient(builder.Configuration["AzureBlobStorage:ConnectionString"]));
-builder.Services.AddSingleton<ChatClient>(sp =>
-{
-    var azureOpenAIConfig = builder.Configuration.GetSection("AzureOpenAI");
-    string key = azureOpenAIConfig["Key"]!;
-    string endpoint = azureOpenAIConfig["Endpoint"]!;
-    string deploymentName = azureOpenAIConfig["DeploymentName"]!;
-    AzureOpenAIClient azureClient = new(
-        new Uri(endpoint),
-        new AzureKeyCredential(key));
-    var client = azureClient.GetChatClient(deploymentName);
-    return client;
-});
+
+builder.AddSemanticKernelServices();
+builder.AddWebsiteGeneratorService();
 
 var app = builder.Build();
 

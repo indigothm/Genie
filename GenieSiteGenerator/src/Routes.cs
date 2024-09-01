@@ -14,9 +14,9 @@ namespace GenieSiteGenerator.src
             app.MapPost("/api/generate", async (
             [FromBody] PageContent content,
             [FromServices] BlobServiceClient blobServiceClient,
-            [FromServices] ChatClient chatClient) =>
+            [FromServices] Generator generator) =>
             {
-                string htmlContent = await Generator.GenerateHtmlWithAI(content, chatClient);
+                string htmlContent = await generator.GenerateHtmlWithAI(content);
                 string uniqueId = Generator.GenerateUniqueId();
                 var containerClient = blobServiceClient.GetBlobContainerClient("$web");
                 var blobClient = containerClient.GetBlobClient($"{uniqueId}.html");
