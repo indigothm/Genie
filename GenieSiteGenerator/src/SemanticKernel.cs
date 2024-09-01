@@ -1,44 +1,42 @@
 ﻿using Microsoft.SemanticKernel;
 using Microsoft.SemanticKernel.ChatCompletion;
 using Microsoft.SemanticKernel.Connectors.OpenAI;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace GenieSiteGenerator.src
 {
-    public static class SemanticKernel
-
+    public static class SemanticKernelExtensions
     {
-        public static WebApplicationBuilder AddSemanticKernelServices(this WebApplicationBuilder builder) {
-
+        public static WebApplicationBuilder AddSemanticKernelServices(this WebApplicationBuilder builder)
+        {
             var azureOpenAIConfig = builder.Configuration.GetSection("AzureOpenAI");
             string key = azureOpenAIConfig["Key"]!;
             string endpoint = azureOpenAIConfig["Endpoint"]!;
             string deploymentName = azureOpenAIConfig["DeploymentName"]!;
 
-            var kernelBuilder = Kernel.CreateBuilder()
-                .AddAzureOpenAIChatCompletion(
-                    deploymentName: deploymentName,
-                    endpoint: endpoint,
-                    apiKey: key
-                );
+            builder.Services.AddSingleton<Kernel>(sp =>
+            {
+                var kernelBuilder = Kernel.CreateBuilder()
+                    .AddAzureOpenAIChatCompletion(
+                        deploymentName: deploymentName,
+                        endpoint: endpoint,
+                        apiKey: key
+                    );
+                return kernelBuilder.Build();
+            });
 
-            var kernel = kernelBuilder.Build();
+            builder.Services.AddSingleton<IChatCompletionService>(sp =>
+            {
+                var kernel = sp.GetRequiredService<Kernel>();
+                return kernel.Services.GetRequiredService<IChatCompletionService>();
+            });
 
-            // TODO: Figure out why this breaks
-            var chatCompletionService = kernel.GetRequiredService<IChatCompletionService>();
-
-            OpenAIPromptExecutionSettings openAIPromptExecutionSettings = new()
+            builder.Services.AddSingleton(new OpenAIPromptExecutionSettings
             {
                 ToolCallBehavior = ToolCallBehavior.AutoInvokeKernelFunctions
-            };
+            });
 
-
-            builder.Services.AddSingleton<ChatMemoryService>((sp) => new ChatMemoryService());            
-
-            builder.Services.AddSingleton<IChatCompletionService>(chatCompletionService);
-
-            builder.Services.AddSingleton<OpenAIPromptExecutionSettings>(openAIPromptExecutionSettings);
-
-            builder.Services.AddSingleton<Kernel>(kernel);
+            builder.Services.AddSingleton<ChatMemoryService>();
 
             return builder;
         }

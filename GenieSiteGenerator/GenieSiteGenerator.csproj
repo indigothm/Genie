@@ -14,8 +14,7 @@
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.8" />
     <PackageReference Include="Microsoft.Azure.Cosmos" Version="3.42.0" />
     <PackageReference Include="Microsoft.Extensions.Azure" Version="1.7.5" />
-    <PackageReference Include="Microsoft.SemanticKernel" Version="1.17.2" />
-    <PackageReference Include="Microsoft.SemanticKernel.Connectors.OpenAI" Version="1.17.2" />
+    <PackageReference Include="Microsoft.SemanticKernel" Version="1.18.1-rc" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.21.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.7.1" />
   </ItemGroup>
