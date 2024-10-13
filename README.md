@@ -13,9 +13,3 @@ Add the following connection strings to appsettings.json
    "ConnectionString": "..."
  }
 
-
-## TODO
-
-- Come up with the payload schema
-- Integrate Azure AI .NET SDK
-- Add authentication 
